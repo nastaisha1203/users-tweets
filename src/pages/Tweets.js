@@ -3,6 +3,7 @@ import { TweetsList } from 'components/TweetsList/TweetsList';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchUsers } from 'services/api';
+import { Main } from './Pages.styled';
 
 const Tweets = () => {
   const [users, setUsers] = useState([]);
@@ -28,12 +29,12 @@ const Tweets = () => {
 
   const backLinkHref = location.state?.from ?? '/';
   return (
-    <>
+    <Main>
       <BackLink to={backLinkHref}>Go back</BackLink>
       {isLoading && <p>Loading...</p>}
       {error && <p>Something went wrong. Try again.</p>}
       {users.length > 0 && <TweetsList users={users} />}
-    </>
+    </Main>
   );
 };
 export default Tweets;

@@ -1,4 +1,4 @@
-import Layout from 'components/Layout/Layout.styled';
+import Layout from 'components/Layout/Layout';
 import Home from 'pages/Home';
 import Tweets from 'pages/Tweets';
 import { Navigate, Route, Routes } from 'react-router-dom';

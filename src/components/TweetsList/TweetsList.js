@@ -1,15 +1,21 @@
 import { Card } from 'components/Card/Card';
+import { List } from './TweetsList.styled';
 
 export const TweetsList = ({ users }) => {
   return (
     <>
-      <ul>
+      <List>
         {users.map(({ id, avatar, tweets, followers }) => (
           <li key={id}>
-            <Card avatar={avatar} tweets={tweets} followers={followers}></Card>
+            <Card
+              id={id}
+              avatar={avatar}
+              tweets={tweets}
+              followers={followers}
+            ></Card>
           </li>
         ))}
-      </ul>
+      </List>
     </>
   );
 };

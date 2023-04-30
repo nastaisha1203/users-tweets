@@ -4,9 +4,6 @@ const AppBar = () => {
   return (
     <Header>
       <Navigation>
-        <Link to="/" end>
-          Home
-        </Link>
         <Link to="tweets">Tweets</Link>
       </Navigation>
     </Header>

@@ -21,17 +21,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-/* img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-} */
-ul {
- list-style: none;
- padding: 0;
- margin: 0;
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
-p {
+
+ul {
+  list-style: none;
+  padding-left: 0;
   margin: 0;
 }
   `;

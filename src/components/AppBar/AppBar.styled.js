@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const Header = styled.header`
+  width: 100%;
   padding: 10px;
   border-bottom: 1px solid black;
   background-color: #ebd8ff;

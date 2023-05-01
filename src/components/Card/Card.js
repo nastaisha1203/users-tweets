@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   CardWrapper,
   Logo,
@@ -9,14 +9,11 @@ import {
   Button,
 } from './Card.styled';
 import logo from 'img/Logo.svg';
+import { useLocalStorage } from 'components/hooks/hooks';
 
 export const Card = ({ id, avatar, tweets, followers }) => {
-  const [following, setFollowing] = useState(
-    JSON.parse(localStorage.getItem(`following-${id}`)) || false
-  );
-  const [count, setCount] = useState(
-    JSON.parse(localStorage.getItem(`count-${id}`)) || followers
-  );
+  const [following, setFollowing] = useLocalStorage(`following-${id}`, false);
+  const [count, setCount] = useLocalStorage(`count-${id}`, followers);
 
   function handleClick() {
     if (following) {
@@ -28,10 +25,10 @@ export const Card = ({ id, avatar, tweets, followers }) => {
     }
   }
 
-  useEffect(() => {
-    localStorage.setItem(`following-${id}`, JSON.stringify(following));
-    localStorage.setItem(`count-${id}`, JSON.stringify(count));
-  }, [following, count, id]);
+  const formattedFollowers = count.toLocaleString('en-US', {
+    style: 'decimal',
+    minimumFractionDigits: 0,
+  });
 
   return (
     <CardWrapper>
@@ -42,7 +39,7 @@ export const Card = ({ id, avatar, tweets, followers }) => {
         </Border>
       </Line>
       <Text tweets>{tweets} tweets</Text>
-      <Text>{count} followers</Text>
+      <Text>{formattedFollowers} followers</Text>
       <Button type="button" following={following} onClick={handleClick}>
         {following ? 'Following' : 'Follow'}
       </Button>

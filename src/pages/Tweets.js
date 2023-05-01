@@ -3,7 +3,7 @@ import { TweetsList } from 'components/TweetsList/TweetsList';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchUsers } from 'services/api';
-import { Main } from './Pages.styled';
+import { Main, Title } from './Pages.styled';
 import { LoadMore } from 'components/LoadMore/LoadMore';
 import { Loader } from 'components/Loader/Loader';
 
@@ -44,7 +44,7 @@ const Tweets = () => {
     <Main>
       <BackLink to={backLinkHref}>Go back</BackLink>
       {isLoading && <Loader />}
-      {error && <p>Something went wrong. Try again.</p>}
+      {error && <Title>Something went wrong. Try again.</Title>}
       {users.length > 0 && <TweetsList users={users.slice(0, perPage)} />}
       {users.length > 0 && totalPages > currentPage && (
         <LoadMore onClick={showMoreItems} />

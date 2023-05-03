@@ -84,4 +84,8 @@ export const Button = styled.button`
   border: none;
 
   cursor: pointer;
+
+  &:hover {
+    border: solid 2px black;
+  }
 `;

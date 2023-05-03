@@ -32,10 +32,10 @@ export const Card = ({ id, avatar, tweets, followers }) => {
 
   return (
     <CardWrapper>
-      <Logo src={logo} alt="logo" />
+      <Logo src={logo} alt="logo" width={76} height={22} />
       <Line>
         <Border>
-          <Img src={avatar} alt="avatar" />
+          <Img src={avatar} alt="avatar" width={62} height={62} />
         </Border>
       </Line>
       <Text tweets>{tweets} tweets</Text>

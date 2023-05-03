@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <Main home>
       <Title>Welcome!</Title>
-      <Img src={homeImg} alt="tweets" />
+      <Img src={homeImg} alt="tweets" width={300} height={300} />
       <h2>In our app you can view and follow tweets</h2>
     </Main>
   );

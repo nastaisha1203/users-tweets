@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CardWrapper,
   Logo,
@@ -9,13 +9,27 @@ import {
   Button,
 } from './Card.styled';
 import logo from 'img/Logo.svg';
-import { useLocalStorage } from 'components/hooks/hooks';
 
 export const Card = ({ id, avatar, tweets, followers }) => {
-  const [following, setFollowing] = useLocalStorage(`following-${id}`, false);
-  const [count, setCount] = useLocalStorage(`count-${id}`, followers);
+  const [following, setFollowing] = useState(() => {
+    const storage = JSON.parse(localStorage.getItem('tweets'));
+    if (storage === null) {
+      return false;
+    }
+    const user = storage.find(item => item.id === id);
+    return user ? user.following : false;
+  });
 
-  function handleClick() {
+  const [count, setCount] = useState(() => {
+    const storage = JSON.parse(localStorage.getItem('tweets'));
+    if (storage === null) {
+      return followers;
+    }
+    const user = storage.find(item => item.id === id);
+    return user ? user.count : followers;
+  });
+
+  const handleClick = () => {
     if (following) {
       setFollowing(false);
       setCount(count - 1);
@@ -23,7 +37,30 @@ export const Card = ({ id, avatar, tweets, followers }) => {
       setFollowing(true);
       setCount(count + 1);
     }
-  }
+  };
+
+  useEffect(() => {
+    const storage = JSON.parse(localStorage.getItem('tweets'));
+    if (storage === null) {
+      localStorage.setItem(
+        `tweets`,
+        JSON.stringify([{ id, following, count }])
+      );
+    } else {
+      const index = storage.findIndex(item => item.id === id);
+      if (index === -1) {
+        storage.push({ id, following, count });
+      } else {
+        storage.splice(index, 1, {
+          id,
+          following,
+          count,
+        });
+      }
+
+      localStorage.setItem(`tweets`, JSON.stringify(storage));
+    }
+  }, [count, following, id]);
 
   const formattedFollowers = count.toLocaleString('en-US', {
     style: 'decimal',
